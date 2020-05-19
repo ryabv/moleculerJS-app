@@ -58,7 +58,7 @@ function App() {
         </div>
       </div>
       <ModalResult swimmer={swimmer} show={showResultModal} setShow={setShowResultModal} />
-      <ModalNewSwimmer show={showNewSwimmerModal} setShow={setShowNewSwimmerModal} />
+      <ModalNewSwimmer swimmersCount={swimmers.length} show={showNewSwimmerModal} setShow={setShowNewSwimmerModal} />
     </div>
   );
 }

@@ -5,6 +5,7 @@ export type ISwimmer = {
     _id: string;
     name: string;
     result: number;
+    position?: number;
 };
 
 interface IProps {
@@ -15,15 +16,17 @@ interface IProps {
 }
 
 function Table({ swimmers, className, modalResultClick, modalNewSwimmerClick }: IProps) {
+    console.log(swimmers);
     function getSwimmers() {
         const rows: React.ReactNode[] = [];
 
         swimmers.forEach((swimmer, i) => {
             rows.push(
                 <TableRow
+                    key={i}
                     handleClick={modalResultClick}
                     swimmer={swimmer}
-                    index={i}
+                    index={i + 1}
                 />
             );
         });

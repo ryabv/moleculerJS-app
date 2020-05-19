@@ -8,6 +8,10 @@ const schema = new Schema({
     result: {
         type: Number,
         required: true,
+    },
+    position: {
+        type: Number,
+        required: true,
     }
 });
 

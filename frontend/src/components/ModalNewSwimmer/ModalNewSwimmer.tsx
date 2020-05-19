@@ -2,11 +2,12 @@ import React from 'react';
 import './ModalNewSwimmer.scss';
 
 interface IProps {
+    swimmersCount: number;
     show: boolean;
     setShow: (show: boolean) => void;
 }
 
-function ModalNewSwimmer({ show = false, setShow }: IProps) {
+function ModalNewSwimmer({ swimmersCount, show = false, setShow }: IProps) {
 
     const handleClick = function() {
         setShow(false);
@@ -24,6 +25,7 @@ function ModalNewSwimmer({ show = false, setShow }: IProps) {
                     </div>
                     <div className="modal-body">
                         <form action="http://localhost:3001/add-swimmer" method="POST">
+                            <input type="hidden" name="position" value={swimmersCount + 1}/>
                             <div className="form-group">
                                 <label htmlFor="addSwimmer">Добавить нового пловца</label>
                                 <input type="text" name="name" className="form-control" id="addSwimmer" />
