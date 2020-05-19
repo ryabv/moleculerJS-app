@@ -25,11 +25,11 @@ function ModalResult({ swimmer, show = false, setShow }: IProps) {
                         </button>
                     </div>
                     <div className="modal-body">
-                        <form action="/update-result">
-                            <input type="hidden" name="swimmer_id" value={swimmer.id}/>
+                        <form action="http://localhost:3001/update-result" method="POST">
+                            <input type="hidden" name="swimmer_id" value={swimmer._id}/>
                             <div className="form-group">
                                 <label htmlFor="addResult">Добавить результат</label>
-                                <input type="number" className="form-control" id="addResult" />
+                                <input type="number" className="form-control" name="result" id="addResult" />
                             </div>
                             <button className="btn btn-primary" type="submit">Добавить</button>
                         </form>

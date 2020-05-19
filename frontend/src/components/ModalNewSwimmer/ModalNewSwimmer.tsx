@@ -23,10 +23,10 @@ function ModalNewSwimmer({ show = false, setShow }: IProps) {
                         </button>
                     </div>
                     <div className="modal-body">
-                        <form action="/add-swimmer">
+                        <form action="http://localhost:3001/add-swimmer" method="POST">
                             <div className="form-group">
                                 <label htmlFor="addSwimmer">Добавить нового пловца</label>
-                                <input type="text" className="form-control" id="addSwimmer" />
+                                <input type="text" name="name" className="form-control" id="addSwimmer" />
                             </div>
                             <button className="btn btn-primary" type="submit">Добавить</button>
                         </form>

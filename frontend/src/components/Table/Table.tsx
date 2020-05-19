@@ -2,7 +2,7 @@ import React from 'react';
 import TableRow from '../TableRow/TableRow';
 
 export type ISwimmer = {
-    id: number;
+    _id: string;
     name: string;
     result: number;
 };

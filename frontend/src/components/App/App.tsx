@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import './App.scss';
 import Table, { ISwimmer } from '../Table/Table';
 import ModalResult from '../ModalResult/ModalResult';
@@ -7,24 +7,30 @@ import ModalNewSwimmer from '../ModalNewSwimmer/ModalNewSwimmer';
 function App() {
   const [showResultModal, setShowResultModal] = useState(false);
   const [showNewSwimmerModal, setShowNewSwimmerModal] = useState(false);
-  const [swimmer, setSwimmer] = useState({id: 0, name: 'start', result: 0});
+  const [swimmer, setSwimmer] = useState({_id: '0', name: 'start', result: 0});
   const [swimmers, setSwimmers] = useState([
     {
-      id: 1,
+      _id: '1',
       name: 'Test',
       result: 0
     },
     {
-      id: 2,
+      _id: '2',
       name: 'John',
       result: 35
     },
     {
-      id: 3,
+      _id: '3',
       name: 'Henry',
       result: 31
     },
   ]);
+
+  useEffect(() => {
+    fetch('http://localhost:3001')
+      .then(r => r.json())
+      .then(setSwimmers);
+  }, []);
 
   const handleResultClick = useCallback((swimmer: ISwimmer) => {
     setSwimmer(swimmer);
@@ -34,7 +40,7 @@ function App() {
   const handleNewSwimmerClick = useCallback(() => {
     setShowNewSwimmerModal(true);
   }, []);
-  
+
   return (
     <div className="App">
       <div className="container">
