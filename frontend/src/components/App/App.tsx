@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import './App.scss';
 import Table, { ISwimmer } from '../Table/Table';
+import { getSwimmersList } from './../../api';
 import ModalResult from '../ModalResult/ModalResult';
 import ModalNewSwimmer from '../ModalNewSwimmer/ModalNewSwimmer';
 
@@ -27,9 +28,7 @@ function App() {
   ]);
 
   useEffect(() => {
-    fetch('http://localhost:3001')
-      .then(r => r.json())
-      .then(setSwimmers);
+    getSwimmersList((swimmers: ISwimmer[]) => {setSwimmers(swimmers)});
   }, []);
 
   const handleResultClick = useCallback((swimmer: ISwimmer) => {

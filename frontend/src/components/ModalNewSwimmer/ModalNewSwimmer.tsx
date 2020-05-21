@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { createRef, FormEvent } from 'react';
 import './ModalNewSwimmer.scss';
+import { addSwimmer } from '../../api';
 
 interface IProps {
     swimmersCount: number;
@@ -8,9 +9,21 @@ interface IProps {
 }
 
 function ModalNewSwimmer({ swimmersCount, show = false, setShow }: IProps) {
+    const input = createRef<HTMLInputElement>();
 
     const handleClick = function() {
         setShow(false);
+    };
+
+    const handleSubmit = function(e: FormEvent) {
+        e.preventDefault();
+        const params = {
+            position: swimmersCount + 1,
+            name: input.current?.value,
+        };
+
+        setShow(false);
+        addSwimmer(params);
     };
 
     return (
@@ -24,11 +37,11 @@ function ModalNewSwimmer({ swimmersCount, show = false, setShow }: IProps) {
                         </button>
                     </div>
                     <div className="modal-body">
-                        <form action="http://localhost:3001/add-swimmer" method="POST">
+                        <form onSubmit={handleSubmit}>
                             <input type="hidden" name="position" value={swimmersCount + 1}/>
                             <div className="form-group">
                                 <label htmlFor="addSwimmer">Добавить нового пловца</label>
-                                <input type="text" name="name" className="form-control" id="addSwimmer" />
+                                <input ref={input} type="text" name="name" className="form-control" id="addSwimmer" />
                             </div>
                             <button className="btn btn-primary" type="submit">Добавить</button>
                         </form>

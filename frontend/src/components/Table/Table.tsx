@@ -16,7 +16,6 @@ interface IProps {
 }
 
 function Table({ swimmers, className, modalResultClick, modalNewSwimmerClick }: IProps) {
-    console.log(swimmers);
     function getSwimmers() {
         const rows: React.ReactNode[] = [];
 

@@ -21,7 +21,7 @@ app.use(swimmerRoutes);
 async function start() {
     try {
         await mongoose.connect(
-            'mongodb+srv://admin:1234@cluster0-irjgd.mongodb.net/test',
+            'mongodb+srv://admin:1234@cluster0-irjgd.mongodb.net/test?retryWrites=true&w=majority',
             {
                 useNewUrlParser: true,
                 useFindAndModify: false,
