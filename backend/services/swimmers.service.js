@@ -2,11 +2,17 @@
 
 const DbService = require("moleculer-db");
 const MongoDBAdapter = require("moleculer-db-adapter-mongo");
+const CacheCleanerMixin = require("../mixins/cache.cleaner.mixin");
 
 module.exports = {
 	name: "swimmers",
 
-	mixins: [DbService],
+	mixins: [
+		DbService,
+		CacheCleanerMixin([
+			"cache.clean.swimmers",
+		]),
+	],
 	adapter: new MongoDBAdapter("mongodb+srv://admin:1234@cluster0-irjgd.mongodb.net/test?retryWrites=true&w=majority"),
 	collection: "swimmers",
 
@@ -53,6 +59,7 @@ module.exports = {
 					await this.adapter.updateById(swimmer._id, {"$set": {position: swimmer.position, result: swimmer.result}});
 				}
 
+				this.broker.cacher.clean("swimmers.**");
 				return this.adapter.find({sort: ["-result"]});
 			}
 		},
@@ -69,8 +76,47 @@ module.exports = {
 					position: Number(ctx.params.position),
 				});
 
+				this.broker.cacher.clean("swimmers.**");
 				return this.adapter.find({sort: ["-result"]});
 			}
 		},
 	},
+
+	methods: {
+		async seedDB() {
+			try {
+				this.logger.info("Seed Posts collection...");
+
+				await this.adapter.insertMany([
+					{
+						name: "Harry",
+						result: 1000,
+						position: 1,
+					},
+					{
+						name: "Hermione",
+						result: 900,
+						position: 2,
+					},
+					{
+						name: "Ron",
+						result: 500,
+						position: 3,
+					},
+				]);
+
+				return this.clearCache();
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	},
+
+	async afterConnected() {
+		const count = await this.adapter.count();
+		console.log('COUNT', count);
+		if (count === 0) {
+			return this.seedDB();
+		}
+	}
 };

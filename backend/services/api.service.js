@@ -14,7 +14,6 @@ module.exports = {
 	name: "api",
 	mixins: [ApiGateway],
 
-	// More info about settings: https://moleculer.services/docs/0.14/moleculer-web.html
 	settings: {
 		// Exposed port
 		port: process.env.PORT || 3001,
@@ -121,15 +120,6 @@ module.exports = {
 		logRequestParams: null,
 		// Logging the response data. Set to any log level to enable it. E.g. "info"
 		logResponseData: null,
-
-
-		// Serve assets from "public" folder. More info: https://moleculer.services/docs/0.14/moleculer-web.html#Serve-static-files
-		assets: {
-			folder: "public",
-
-			// Options to `server-static` module
-			options: {}
-		}
 	},
 
 	methods: {
