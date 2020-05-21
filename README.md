@@ -8,3 +8,7 @@
 1. Далее необходимо поднять `Redis`. Так как официально Redis не поддерживает Windows, то чтобы использовать его на данной ОС, необходимо выполнить всё так, как написано по этой ссылке https://riptutorial.com/ru/redis/example/29962/установка-и-запуск-redis-server-в-windows
 1. Выполните команду `cd frontend`, затем `npm install`, затем `npm start`
 1. Перейдите в папку `backend` и выполните `npm install`, затем `npm run dev`
+
+Доступы к почте, на которую приходят уведомления: <br>
+Логин: rv_test_rv@yandex.ru <br>
+Пароль: Q1W2E3r4
