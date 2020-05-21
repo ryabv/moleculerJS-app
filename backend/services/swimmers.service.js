@@ -107,7 +107,12 @@ module.exports = {
 
 				return this.clearCache();
 			} catch (error) {
-				console.log(error);
+				if (error.name == "ServiceNotFoundError") {
+					console.log("Waiting for swimmers service...");
+					setTimeout(this.seedDB, 1000);
+				} else {
+					console.log(error);
+				}
 			}
 		}
 	},
